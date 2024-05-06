@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 
-const BooksSchema = new mongoose.Schema({
+const bookSchema = mongoose.Schema({
     title: {
         type:String,
         required: [true, 'please add book title'],
@@ -9,7 +9,7 @@ const BooksSchema = new mongoose.Schema({
     genre: {
         type:String,
         required: [true, 'please add a genre'],
-        length:50
+        maxlength:50
     },
     author: {
         type:String,
@@ -22,4 +22,4 @@ const BooksSchema = new mongoose.Schema({
 }
 )
 
-export const Book = mongoose.model('Book', BooksSchema)
+export const Book = mongoose.model('Book', bookSchema)

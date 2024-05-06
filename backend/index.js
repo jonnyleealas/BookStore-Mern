@@ -2,12 +2,17 @@ import express from "express";
 import {PORT, MONGO_URI} from "./config.js"
 import mongoose from "mongoose";
 import {Book} from "./model/books.js"
+import { createBook, deleteBook } from "./routes/books.js";
+
+
 
 
 const app = express()
 
 // must addes express.json to read json
 app.use(express.json())
+
+// routes
 
 app.get('/', (req, res) => {
     res.send('<h1>Hello bitch<h1/>')

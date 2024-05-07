@@ -1,8 +1,8 @@
-import express from "express";
+import express, { response } from "express";
 import {PORT, MONGO_URI} from "./config.js"
 import mongoose from "mongoose";
 import {Book} from "./model/books.js"
-import { createBook, deleteBook } from "./routes/books.js";
+
 
 
 
@@ -14,12 +14,40 @@ app.use(express.json())
 
 // routes
 
-app.get('/', (req, res) => {
-    res.send('<h1>Hello bitch<h1/>')
+app.get('/', async (req, res) => {
+    const allBooks = await Book.find({})
+    res.status(201).json({allBooks})
 })
 
 app.listen(PORT, () => {
     console.log(`app listening on port: ${PORT}`)
+})
+
+app.get('/books/:id', async (req, res) => {
+    try {
+        const {params:{id: bookId}} = req
+        console.log(req)
+        const book = await Book.findOne({_id:bookId})
+         res.status(200).json({
+            book
+        })
+    } catch (error) {
+        response.status(500).send({message: error.message})
+    }
+})
+
+app.delete('/books/:id', async (req, res) => {
+    try {
+        const {params:{id: bookId}} = req
+        const book = await Book.findOneAndDelete({_id:bookId})
+        if(!book) {
+            return response.status(200).json({message: 'book not found'})
+        }
+
+        return res.status(200).send({message: 'book deleted successfully'})
+    } catch (error) {
+        response.status(500).send({message: error.message})
+    }
 })
 
 app.post('/books', async (req, res) => {

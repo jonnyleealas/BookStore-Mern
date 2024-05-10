@@ -37,25 +37,22 @@ app.get('/books/:id', async (req, res) => {
 })
 
 app.put('/books/:id', async (req, res) => {
+    try {
+        if(!req.body.title || !req.body.genre || !req.body.author){
+            return res.status(400).send({message: 'please enter all required fields'})
+        }
+        const {id} = req.params
+        const updatedBook = await Book.findByIdAndUpdate(id, req.body)
 
-    try{
-    if(!req.body.title || !req.body.author || !req.body.genre){
-        return res.status(400).send({message: 'send all required fields: title, author, publisher'})
+        if(!updatedBook){
+            return res.status(404).json({message: 'book not found'})
+        }
+
+        return res.status(200).json({updatedBook})
+    } catch (err) {
+        console.log(err.message)
+        res.status(500).send({message: err.message})
     }
-
-    const {id} = req.params
-
-    const result = await Book.findByIdAndUpdate(id, req.body)
-
-    if(!result){
-        return res.status(404).json({message: 'book not found'})
-    } 
-    return res.status(200).json({result})
-    
-} catch (error){
-        res.status(500).send({message: error.message})
-    }
-
 })
 
 app.delete('/books/:id', async (req, res) => {

@@ -1,8 +1,8 @@
 import express from "express";
 import {PORT, MONGO_URI} from "./config.js"
 import mongoose from "mongoose";
-import books from './routes/books.js'
-
+import { Book } from './model/books.js'
+import router from './routes/books.js'
 
 
 
@@ -13,16 +13,16 @@ const app = express()
 app.use(express.json())
 
 // routes
-app.use('/books', books)
+app.use('/books', router)
 
 mongoose
 .connect(MONGO_URI)
 .then(() => {
-    console.log('app connected to database')
+    console.log("app connedted to database")
     app.listen(PORT, () => {
-        console.log(`app listening on port: ${PORT}`)
+        console.log(`app listening on port${PORT}`)
     })
 })
-.catch((error) => {
+.catch ((error) => {
     console.log(error)
 })

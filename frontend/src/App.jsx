@@ -1,15 +1,8 @@
 import React from 'react'
-import {Routes, Route} from 'react-router-dom'
-import GetBook from './pages/GetBook'
-import Home from './pages/Home'
 
-
-
-export const App = () => {
+const App = () => {
   return (
-    <Routes>
-      <Route path='/' element={<Home />} />
-    </Routes>
+    <div className='bg-red-400 text-white'>App</div>
   )
 }
 

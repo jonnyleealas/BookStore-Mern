@@ -15,7 +15,6 @@ const Home = () => {
     axios
     .get('http://localhost:5555/books')
     .then((response) => {
-      console.log( 'fuckkkk:', response.data.allBooks)
       setBooks(response.data.allBooks)
       setLoading(false)
     })
@@ -46,7 +45,6 @@ const Home = () => {
             </tr>
           </thead>
           <tbody>
-            {console.log('bitch', books)}
             {books.map((book, index) => (
               <tr key={book._id} className='h-8'>
               <td className='border border-slate-700 rounded-md text-center'>

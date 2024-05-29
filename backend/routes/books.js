@@ -13,16 +13,16 @@ router.get('/', async (req, res) => {
 
 router.get('/:id', async (req, res) => {
     try {
-        const {params:{id: bookId}} = req
-        console.log(req)
-        const book = await Book.findOne({_id:bookId})
-         res.status(200).json({
-            book
-        })
+        const {id} = req.params
+    
+        const book = await Book.findById(id)
+
+         res.status(200).json(book)
     } catch (error) {
-        response.status(500).send({message: error.message})
+        res.status(500).send({ message: error.message });
     }
 })
+
 
 router.put('/:id', async (req, res) => {
     try {

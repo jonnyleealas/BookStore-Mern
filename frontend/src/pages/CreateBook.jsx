@@ -5,13 +5,12 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
 
-export default function CreateBook(){
+export const CreateBook = () => {
   const [loading, setLoading] = useState(false)
   const [title, setTitle] = useState('')
   const [author, setAuthor] = useState('')
   const [genre, setGenre] = useState('')
   const navigate = useNavigate()
-
   const handleSaveBook = () => {
     const data = {
       title,
@@ -20,18 +19,19 @@ export default function CreateBook(){
     }
     setLoading(true)
     axios
-      .post('http://localhost:5555/books', data)
-      .then(() => {
-        setLoading(false)
-        navigate('/')
-      })
-      .catch((error) => {
-        setLoading(false)
-        alert('An error has occured. Please check console')
-        console.log(error)
-      })
+    .post('http://localhost:5555/books', data)
+    .then(() => {
+      setLoading(false)
+      navigate('/')
+    })
+    .catch((error) => {
+      setLoading(false)
+      alert('An error has occured. Please check console')
+      console.log(error)
+    })
   }
-
+  
+  console.log(title)
   return (
     <div className='p-4'>
       <BackButton />

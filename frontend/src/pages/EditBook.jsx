@@ -18,7 +18,6 @@ export const EditBook = () => {
     setLoading(true);
     axios.get(`http://localhost:5555/books/${id}`)
     .then((response) => {
-      console.log('fuck',response.data.author)
         setAuthor(response.data.author);
         setGenre(response.data.genre)
         setTitle(response.data.title)

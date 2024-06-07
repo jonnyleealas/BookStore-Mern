@@ -16,7 +16,7 @@ const ShowBook = () => {
       .get(`http://localhost:5555/books/${id}`)
       .then((response) => {
         console.log('fuckface:', response.data.book)
-        setBook(response.data.book)
+        setBook(response.data)
         setLoading(false)
       })
       .catch((error) => {

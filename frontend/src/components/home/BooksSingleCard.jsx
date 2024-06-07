@@ -10,12 +10,8 @@ import { BookModal } from "./BookModal"
 export const BooksSingleCard = ({book}) => {
     const [showModal, setShowModal] = useState(false)
   return (
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                <div
-                key={book._id}
-                className="border-2 border-gray-500 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl"
-                >
-                    <h2 className="absolute top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
+    <div className="border-2 border-gray-500 rounded-lg px-4 py-2 m-4 relative hover:shadow-xl">
+                 <h2 className="absolute top-1 right-2 px-4 py-1 bg-red-300 rounded-lg">
                         {book.genre}
                     </h2>
                     <h4 className="my-2 text-gray-500">{book._id}</h4>
@@ -42,7 +38,7 @@ export const BooksSingleCard = ({book}) => {
                             <MdOutlineDelete className="text-2xl text-red-600 hover:text-black" />
                         </Link>
                     </div>
-                </div>
+                
                 {
                     showModal && (
                         <BookModal book={book} onClose={() => setShowModal(false)} />
